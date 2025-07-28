@@ -1,5 +1,5 @@
-// ✅ Use your Render backend URL
-const BASE_URL = "https://venu-pan-shop.onrender.com";
+// ✅ Dynamically use env variable
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const fetchJSON = async (url, options = {}) => {
   try {
@@ -12,18 +12,13 @@ const fetchJSON = async (url, options = {}) => {
   }
 };
 
-// ✅ Fetch all inventory items
 export const getInventory = () => fetchJSON(`${BASE_URL}/inventory`);
-
-// ✅ Log used ingredient
 export const logUsage = (data) =>
   fetchJSON(`${BASE_URL}/use`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-
-// ✅ Add incoming stock
 export const addStock = (data) =>
   fetchJSON(`${BASE_URL}/stock`, {
     method: "POST",
@@ -31,7 +26,6 @@ export const addStock = (data) =>
     body: JSON.stringify(data),
   });
 
-// ✅ Reports API
 export const getUsedToday = () => fetchJSON(`${BASE_URL}/report/used-today`);
 export const getStockToday = () => fetchJSON(`${BASE_URL}/report/stock-today`);
 export const getReorderAlerts = () => fetchJSON(`${BASE_URL}/report/reorder`);
