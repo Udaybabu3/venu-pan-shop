@@ -1,0 +1,186 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #eef2f7; /* Light grey background */
+  color: #222;
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  width: 100%;
+  max-width: 950px;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+/* Header */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+/* Navigation Buttons */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+button.active {
+  background: #007bff;
+  color: white;
+}
+
+/* Section Titles */
+h2, h3 {
+  margin: 25px 0 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #374151;
+}
+
+/* Card-style sections */
+section, ul li, form {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+/* Inventory Table */
+.inventory-container {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+  text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+th, td {
+  border: 1px solid #e5e7eb;
+  padding: 12px 15px;
+}
+
+th {
+  background: #f3f4f6;
+  font-weight: bold;
+}
+
+td.low-stock {
+  color: #e63946;
+  font-weight: bold;
+}
+
+td.normal-stock {
+  color: #2a9d8f;
+  font-weight: bold;
+}
+
+/* Report Lists */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  margin: 6px auto;
+  padding: 12px;
+  max-width: 500px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-align: left;
+  background: #f9fafb;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+/* Download PDF Button */
+button.pdf-btn {
+  background: #10b981;
+  color: white;
+  font-weight: bold;
+}
+
+button.pdf-btn:hover {
+  background: #059669;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .App {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  nav {
+    gap: 8px;
+  }
+
+  table {
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+
+  ul li {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
