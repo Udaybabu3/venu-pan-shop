@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import express from 'express';
+import pkg from 'pg';
+const { Pool } = pkg;
 
-const StockForm = () => {
-  const [formData, setFormData] = useState({
-    ingredient_id: '',
-    added_amount: ''
-  });
+const app = express();
+app.use(express.json()); // ✅ Important to parse JSON body
 
-  const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL, // Your DB URL from Vercel
+});
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    await axios.post('http://localhost:5000/stock', formData);
-    alert('✅ Stock added!');
-    setFormData({ ingredient_id: '', added_amount: '' });
-  };
+// ✅ Add Stock Route
+app.post('/stock', async (req, res) => {
+  try {
+    const { ingredient_id, added_amount } = req.body;
 
-  return (
-    <div>
-      <h2>📥 Add Incoming Stock</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="number" name="ingredient_id" placeholder="Ingredient ID" value={formData.ingredient_id} onChange={handleChange} required />
-        <input type="number" name="added_amount" placeholder="Added Amount" value={formData.added_amount} onChange={handleChange} required />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  );
-};
+    // Input validation
+    if (!ingredient_id || !added_amount) {
+      return res.status(400).json({ error: 'Missing ingredient_id or added_amount' });
+    }
 
-export default StockForm;
+    // Update stock in DB
+    await pool.query(
+      'UPDATE ingredients SET current_stock = current_stock + $1 WHERE ingredient_id = $2',
+      [added_amount, ingredient_id]
+    );
+
+    res.json({ message: '✅ Stock updated successfully!' });
+  } catch (err) {
+    console.error('Add Stock Error:', err); // Log in Vercel
+    res.status(500).json({ error: 'Internal Server Error', details: err.message });
+  }
+});
+
+export default app;
