@@ -1,113 +1,54 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #eef2f7; /* Light grey background */
+  background: #f4f6f8;
   color: #222;
-  display: flex;
-  justify-content: center;
-}
-
-.App {
-  width: 100%;
-  max-width: 950px;
-  padding: 30px 20px;
   text-align: center;
 }
 
-/* Header */
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  font-weight: bold;
-  color: #1f2937;
+.App {
+  padding: 15px;
+  max-width: 100%;
 }
 
-/* Navigation Buttons */
+/* Main Heading */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+/* Navbar Buttons */
 nav {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 10px 15px;
   font-size: 1rem;
-  border: none;
+  border: 1px solid #ddd;
   border-radius: 8px;
   cursor: pointer;
-  background: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  background: #fff;
+  transition: all 0.2s ease-in-out;
 }
 
 button:hover {
   background: #007bff;
-  color: #fff;
+  color: white;
 }
 
 button.active {
   background: #007bff;
   color: white;
+  border-color: #007bff;
 }
 
-/* Section Titles */
-h2, h3 {
-  margin: 25px 0 15px;
-  font-weight: bold;
-  text-align: center;
-  color: #374151;
-}
-
-/* Card-style sections */
-section, ul li, form {
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-}
-
-/* Inventory Table */
-.inventory-container {
-  display: flex;
-  justify-content: center;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 750px;
-  margin: auto;
-  text-align: center;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-th, td {
-  border: 1px solid #e5e7eb;
-  padding: 12px 15px;
-}
-
-th {
-  background: #f3f4f6;
-  font-weight: bold;
-}
-
-td.low-stock {
-  color: #e63946;
-  font-weight: bold;
-}
-
-td.normal-stock {
-  color: #2a9d8f;
-  font-weight: bold;
-}
-
-/* Report Lists */
+/* Lists & Cards */
 ul {
   list-style: none;
   padding: 0;
@@ -115,72 +56,91 @@ ul {
 }
 
 ul li {
-  margin: 6px auto;
+  background: #fff;
+  margin: 8px auto;
   padding: 12px;
-  max-width: 500px;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  font-size: 1rem;
-  text-align: left;
-  background: #f9fafb;
-}
-
-/* Forms */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  width: 90%;
   max-width: 400px;
-  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+/* Inputs */
 input {
-  padding: 10px;
+  width: 90%;
+  max-width: 400px;
+  padding: 12px;
+  margin: 8px auto;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s ease;
+  display: block;
 }
 
-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+/* Tables */
+table {
+  width: 95%;
+  margin: auto;
+  border-collapse: collapse;
+  font-size: 0.9rem;
 }
 
-/* Download PDF Button */
-button.pdf-btn {
-  background: #10b981;
-  color: white;
-  font-weight: bold;
+th, td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
 }
 
-button.pdf-btn:hover {
-  background: #059669;
+th {
+  background: #f1f1f1;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .App {
-    padding: 15px;
-  }
+/* ===================================== */
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+/* ===================================== */
 
-  h1 {
-    font-size: 2rem;
-  }
+/* Extra Small Devices (Phones: up to 600px) */
+@media (max-width: 600px) {
+  h1 { font-size: 1.6rem; margin-bottom: 15px; }
+  nav { flex-direction: column; gap: 10px; }
+  button { width: 90%; font-size: 1rem; }
+  ul li, input, table { width: 95%; }
+  td, th { font-size: 0.85rem; padding: 6px; }
+}
 
-  nav {
-    gap: 8px;
-  }
+/* Small Devices (Tablets: 601px - 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+  h1 { font-size: 1.8rem; }
+  nav { gap: 12px; }
+  button { font-size: 1.05rem; padding: 12px 18px; }
+  ul li, input { max-width: 450px; }
+  table { font-size: 0.95rem; }
+}
 
-  table {
-    font-size: 0.9rem;
-    overflow-x: auto;
-    display: block;
-  }
+/* Medium Devices (Small Laptops: 769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  h1 { font-size: 2rem; }
+  nav { gap: 14px; }
+  button { font-size: 1.1rem; }
+  ul li, input { max-width: 500px; }
+  table { font-size: 1rem; }
+}
 
-  ul li {
-    width: 100%;
-    font-size: 0.95rem;
-  }
+/* Large Devices (Laptops & Desktops: 1025px - 1440px) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  h1 { font-size: 2.2rem; }
+  nav { gap: 16px; }
+  button { font-size: 1.15rem; }
+  ul li, input { max-width: 550px; }
+  table { font-size: 1.05rem; }
+}
+
+/* Extra Large Devices (Big Screens: 1441px and above) */
+@media (min-width: 1441px) {
+  h1 { font-size: 2.4rem; }
+  button { font-size: 1.2rem; padding: 14px 20px; }
+  ul li, input { max-width: 600px; }
+  table { font-size: 1.1rem; }
 }
