@@ -1,35 +1,57 @@
-import express from 'express';
-import pkg from 'pg';
-const { Pool } = pkg;
+import React, { useState } from 'react';
+import { addStock } from '../api';
 
-const app = express();
-app.use(express.json()); // ✅ Important to parse JSON body
+const StockForm = () => {
+  const [formData, setFormData] = useState({ ingredient_id: '', added_amount: '' });
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // Your DB URL from Vercel
-});
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-// ✅ Add Stock Route
-app.post('/stock', async (req, res) => {
-  try {
-    const { ingredient_id, added_amount } = req.body;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const id = parseInt(formData.ingredient_id);
+      const amount = parseInt(formData.added_amount);
 
-    // Input validation
-    if (!ingredient_id || !added_amount) {
-      return res.status(400).json({ error: 'Missing ingredient_id or added_amount' });
+      if (isNaN(id) || isNaN(amount) || id <= 0 || amount <= 0) {
+        alert("❌ Please enter valid positive numbers.");
+        return;
+      }
+
+      await addStock({ ingredient_id: id, added_amount: amount });
+      alert('✅ Stock added!');
+      setFormData({ ingredient_id: '', added_amount: '' });
+    } catch (err) {
+      console.error(err);
+      alert('❌ Failed to add stock.');
     }
+  };
 
-    // Update stock in DB
-    await pool.query(
-      'UPDATE ingredients SET current_stock = current_stock + $1 WHERE ingredient_id = $2',
-      [added_amount, ingredient_id]
-    );
+  return (
+    <div>
+      <h2>📥 Add Incoming Stock</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="number"
+          name="ingredient_id"
+          placeholder="Ingredient ID"
+          value={formData.ingredient_id}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="number"
+          name="added_amount"
+          placeholder="Added Amount"
+          value={formData.added_amount}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
 
-    res.json({ message: '✅ Stock updated successfully!' });
-  } catch (err) {
-    console.error('Add Stock Error:', err); // Log in Vercel
-    res.status(500).json({ error: 'Internal Server Error', details: err.message });
-  }
-});
-
-export default app;
+export default StockForm;

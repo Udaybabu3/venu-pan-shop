@@ -1,5 +1,5 @@
-// ✅ Dynamically use env variable
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// ✅ Use Render backend URL from env or fallback
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://venu-pan-shop.onrender.com";
 
 const fetchJSON = async (url, options = {}) => {
   try {
@@ -19,6 +19,7 @@ export const logUsage = (data) =>
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+
 export const addStock = (data) =>
   fetchJSON(`${BASE_URL}/stock`, {
     method: "POST",
