@@ -6,9 +6,11 @@ body {
   text-align: center;
 }
 
+/* Center the entire app on larger screens */
 .App {
   padding: 15px;
-  max-width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* 👈 centers the content horizontally */
 }
 
 /* Main Heading */
